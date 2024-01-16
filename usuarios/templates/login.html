@@ -39,7 +39,7 @@
           {% if messages %} {% for message in messages %}
           <section class="alert {{message.tags}}">{{message}}</section>
           {% endfor %} {% endif %}
-          <form action="" method="">
+          <form action="{%url 'login_usuario' %}" method="POST">
             <label>Username</label>
             <input type="text" class="input-form" name="username" id="" />
             <br />

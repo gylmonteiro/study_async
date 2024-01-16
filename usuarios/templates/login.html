@@ -40,6 +40,7 @@
           <section class="alert {{message.tags}}">{{message}}</section>
           {% endfor %} {% endif %}
           <form action="{%url 'login_usuario' %}" method="POST">
+            {% csrf_token %}
             <label>Username</label>
             <input type="text" class="input-form" name="username" id="" />
             <br />

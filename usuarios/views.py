@@ -4,7 +4,8 @@ from django.contrib.messages import constants
 from django.contrib import messages
 
 # Create your views here.
-def cadastro (request):
+def cadastrar (request):
+
     if request.method == "GET":
         return render (request, 'cadastro.html')
     else:
@@ -24,7 +25,13 @@ def cadastro (request):
         
         try:
             user = User.objects.create_user(username=username, password=senha)
+            messages.add_message(request,constants.SUCCESS, f'{user.username} foi cadastro com sucesso')
             return redirect('/usuarios/login')
         except:
             messages.add_message(request, constants.ERROR, 'Erro interno do seriviço')
             return redirect('/usuarios/cadastro')
+        
+def logar(request):
+    if request.method == "GET":
+
+        return render(request, 'login.html')

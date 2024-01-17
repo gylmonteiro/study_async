@@ -43,8 +43,8 @@ def logar(request):
         user = authenticate(request, username=username, password=senha)
         if user:
             login(request, user)
-            messages.add_message(request, constants.SUCCESS, f'{user.username} logado com sucesso')
-            return HttpResponse("teste")
+            # messages.add_message(request, constants.SUCCESS, f'{user.username} logado com sucesso')
+            return redirect('/flashcard/novo_flashcard')
         else:
             messages.add_message(request, constants.ERROR, "Usuário ou senha inválidos")
             return redirect('/usuarios/logar')

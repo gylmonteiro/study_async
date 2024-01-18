@@ -62,7 +62,14 @@ def novo_flashcard(request):
         return redirect('/flashcard/novo_flashcard')
     
 def deletar_flashcard(request, id):
+
     flashcard = Flashcard.objects.get(id=id)
-    flashcard.delete()
-    messages.add_message(request, constants.SUCCESS, "Flashcard deletado com sucesso")
-    return redirect('/flashcard/novo_flashcard')
+
+    # validaçao do usuario
+    if request.user == flashcard.user:
+        flashcard.delete()
+        messages.add_message(request, constants.SUCCESS, "Flashcard deletado com sucesso")
+        return redirect('/flashcard/novo_flashcard')
+    else:
+        messages.add_message(request, constants.ERROR, 'Esse flashcard não pertence a você')
+        return redirect('/flashcard/novo_flashcard')

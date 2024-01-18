@@ -81,7 +81,7 @@ def iniciar_desafio(request):
         dificuldades = Flashcard.DIFICULDADE_CHOICES
         return render(
             request,
-            'desafio.html',
+            'iniciar_desafio.html',
             {'categorias': categorias, 'dificuldades': dificuldades},
         )
     elif request.method == 'POST':
@@ -122,3 +122,26 @@ def iniciar_desafio(request):
         desafio.save()
 
         return redirect(f'/flashcard/desafio/{desafio.id}')
+    
+
+def listar_desafio(request):
+    desafios = Desafio.objects.filter(user=request.user)
+    return render(
+        request,
+        'listar_desafio.html',
+        {
+            'desafios': desafios,
+        },
+    )
+
+def desafio(request, id):
+    desafio = Desafio.objects.get(id=id)
+
+    if request.method == 'GET':
+        return render(
+            request,
+            'desafio.html',
+            {
+                'desafio': desafio,
+            },
+        )

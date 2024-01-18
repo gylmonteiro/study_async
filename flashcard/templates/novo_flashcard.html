@@ -44,7 +44,7 @@
                                         {% for categoria in categorias %}
                                             <option value="{{categoria.id}}">{{categoria.nome}}</option>
                                         {% endfor %}
-                                    </select>=
+                                    </select>
                                 </div>
                                 <div class="col-md">
                                     <label for="">Dificuldade</label>
@@ -101,14 +101,14 @@
                 <br>
                 <br>
                {% for flash in flashcards %}
-                    <div class="box-new-flashcard">
-                        <div class="flashcard ">
+                    <div class="box-new-flashcard" onclick="flip_card({{flash.id}})">
+                        <div class="flashcard">
 
                             <div class="flashcard-categoria">
                                 {{flash.categoria}}
                             </div>
 
-                            <a href=""><i class='icone-exit bx bx-x-circle'></i></a>
+                            <a href="{% url 'deleta_flashcard' flash.id %}"><i class='icone-exit bx bx-x-circle'></i></a>
                             <br>
                             <br>
                             <div class="flashcard-box-item">
@@ -116,7 +116,7 @@
                             </div>
                             
                         </div>
-                        <div class="resposta-flashcard">
+                        <div class="resposta-flashcard" id="{{flash.id}}">
                             {{flash.resposta}}
                         </div>
                     </div>
@@ -129,3 +129,8 @@
     </div>
     
 {% endblock 'conteudo' %}
+
+{% block 'script' %}
+    <script src='{% static "flashcard/js/display_card.js" %}'></script>
+{% endblock 'script' %}
+

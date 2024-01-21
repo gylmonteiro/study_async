@@ -138,7 +138,8 @@ def listar_desafio(request):
 def desafio(request, id):
 
     desafio = Desafio.objects.get(id=id)
-
+    if not desafio.user == request.user:
+        raise Http404()
     if request.method == 'GET':
 
         acertos = desafio.flashcards.filter(respondido=True).filter(acertou=True).count()
